@@ -2,11 +2,12 @@ import platform
 import serial
 import time
 import subprocess
-import winsound
+if platform.system() == "Windows":
+    import winsound
 
 # ==== CONFIGURATION ====
-# SERIAL_PORT = '/dev/cu.usbmodem4048FDEBA6D01'  # Update as needed
-SERIAL_PORT = "COM8"  # Update as needed
+SERIAL_PORT = '/dev/cu.usbmodem4048FDEBA6D01'  # Update as needed
+#SERIAL_PORT = "COM8"  # Update as needed
 BAUD_RATE = 9600
 TARGET_DEVICE_MAC = "D0:76:50:80:15:32"
 SOUND_FILE = "beep.wav"  # Must exist in the same folder
@@ -21,7 +22,7 @@ def play_beep():
         if platform.system() == "Windows":
             winsound.PlaySound(SOUND_FILE, winsound.SND_FILENAME)
         else:
-            subprocess.call(["afplay", SOUND_FILE])  # For macOS
+            subprocess.call(["afplay", SOUND_FILE])
     except Exception as e:
         print(f"Failed to play sound: {e}")
 
