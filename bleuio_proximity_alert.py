@@ -40,6 +40,11 @@ def connect_to_bleuio():
         if not rssi_value.startswith("-"):
             rssi_value = "-" + rssi_value
 
+        command = f"AT+CENTRAL\r\n".encode()
+        ser.write(command)
+        print(f"BleuIO set to central role\n")
+        time.sleep(0.5)
+
         # Send AT+FRSSI command
         command = f"AT+FRSSI={rssi_value}\r\n".encode()
         ser.write(command)
